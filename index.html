@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Hello Kitty Site</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Hello from my phone!</h1>
+    
+    <!-- You must replace 'hello_kitty_with_flowers.png' with the actual filename you upload to GitHub -->
+    <img src="hello_kitty_with_flowers.png" alt="Hello Kitty with Flowers" id="kitty-pic">
+
+    <p id="message">Please make a choice:</p>
+    
+    <div class="buttons">
+        <button id="yes-btn" onclick="handleYes()">Yes</button>
+        <button id="no-btn" onclick="handleNo()">Are you sure?</button>
+    </div>
+
+    <script>
+        function handleYes() {
+            document.getElementById('message').innerText = 'yayayayay i knew it <3';
+            // Hide buttons once "Yes" is clicked
+            document.querySelector('.buttons').style.display = 'none'; 
+        }
+
+        function handleNo() {
+            const noBtn = document.getElementById('no-btn');
+            if (noBtn.innerText === 'Are you sure?') {
+                noBtn.innerText = 'Are u super sure?';
+            } else if (noBtn.innerText === 'Are u super sure?') {
+                noBtn.innerText = 'C’mon please';
+            } else {
+                // Optionally reset or do something else if they keep clicking no
+                alert('Okay, maybe next time! :(');
+            }
+        }
+    </script>
+</body>
+</html>
