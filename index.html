@@ -1,42 +1,60 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Hello Kitty Site</title>
+    <title>Valentine's Day Request</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Be my valentine??</h1>
-    
-    <!-- You must replace 'hello_kitty_with_flowers.png' with the actual filename you upload to GitHub -->
-    <img src="IMG_3450.png" alt="Hello Kitty with Flowers" id="kitty-pic">
+    <div id="container">
+        <h1 id="question">Will you be my valentine??</h1>
+        
+        <!-- Bild-Bereich -->
+        <img src="IMG_3450.png" alt="Valentine Image" id="valentine-pic">
 
-    <p id="message">Please:</p>
-    
-    <div class="buttons">
-        <button id="yes-btn" onclick="handleYes()">Yes</button>
-        <button id="no-btn" onclick="handleNo()">Are you sure?</button>
+        <p id="message"></p>
+        
+        <div class="buttons">
+            <button id="yes-btn" onclick="handleYes()">Yes</button>
+            <button id="no-btn" onclick="handleNo()">No</button>
+        </div>
     </div>
 
     <script>
-        function handleYes() {
-            document.getElementById('message').innerText = 'yayayayay i knew it <3';
-            // Hide buttons once "Yes" is clicked
-            document.querySelector('.buttons').style.display = 'none'; 
-        }
+        let noClickCount = 0;
+        const noTexts = ["No", "r u sure?", "r u rlly sure?", "c’mon", "u have no choice anyway"];
 
         function handleNo() {
             const noBtn = document.getElementById('no-btn');
-            if (noBtn.innerText === 'No') {
-                noBtn.innerText = 'Are u sure?';
-            } else if (noBtn.innerText === 'Are u super sure?') {
-                noBtn.innerText = 'C’mon please';
+            const yesBtn = document.getElementById('yes-btn');
+            
+            noClickCount++;
+
+            // Ändert den Text des No-Buttons basierend auf der Klickanzahl
+            if (noClickCount < noTexts.length) {
+                noBtn.innerText = noTexts[noClickCount];
             } else {
-                // Optionally reset or do something else if they keep clicking no
-                alert('Bro thinks he had a choice to begin with! :(');
+                noBtn.innerText = noTexts[noTexts.length - 1];
             }
+
+            // Macht den Yes-Button größer (Skalierung)
+            const currentSize = 1 + (noClickCount * 0.4); // Wächst um 40% pro Klick
+            yesBtn.style.transform = `scale(${currentSize})`;
+            
+            // Optional: Schiebt den No-Button etwas zur Seite, damit Platz ist
+            noBtn.style.marginLeft = `${noClickCount * 15}px`;
+        }
+
+        function handleYes() {
+            // Screen Update bei "Yes"
+            document.getElementById('question').innerText = 'yayayayayay <3';
+            document.querySelector('.buttons').style.display = 'none';
+            document.getElementById('message').innerText = '';
+            
+            // Optional: Hier könntest du ein anderes "Happy" Bild laden
+            // document.getElementById('valentine-pic').src = 'happy-image.png';
         }
     </script>
 </body>
 </html>
+
